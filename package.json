@@ -1,0 +1,77 @@
+{
+  "name": "schoober-ai-sdk",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Glint AI Agent - 一个基于 ReAct 模式的 AI Agent 框架",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
+      "types": "./dist/esm/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/esm/core/index.js",
+      "require": "./dist/cjs/core/index.cjs",
+      "types": "./dist/esm/core/index.d.ts"
+    },
+    "./providers": {
+      "import": "./dist/esm/providers/index.js",
+      "require": "./dist/cjs/providers/index.cjs",
+      "types": "./dist/esm/providers/index.d.ts"
+    },
+    "./prompts": {
+      "import": "./dist/esm/prompts/index.js",
+      "require": "./dist/cjs/prompts/index.cjs",
+      "types": "./dist/esm/prompts/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rslib build",
+    "dev": "rslib build --watch",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "agent",
+    "ai",
+    "llm",
+    "react",
+    "openai",
+    "anthropic",
+    "claude",
+    "gpt"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@ai-sdk/openai": "^2.0.88",
+    "@ai-sdk/openai-compatible": "^1.0.29",
+    "@anthropic-ai/sdk": "0.71.2",
+    "ai": "5.0.114",
+    "fs-extra": "^11.3.2",
+    "nanoid": "^5.1.6",
+    "openai": "6.15.0",
+    "tiktoken": "^1.0.22",
+    "zod": "4.2.1",
+    "zod-to-json-schema": "^3.23.5"
+  },
+  "devDependencies": {
+    "@rslib/core": "0.11.1",
+    "@types/fs-extra": "^11.0.4",
+    "@vitest/coverage-v8": "^2.0.0",
+    "typescript": "^5.3.3",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
