@@ -4,7 +4,7 @@
 
 schoober-ai-sdk 是一个基于 **ReAct（Reasoning + Acting）模式** 的 AI Agent 框架，使用 TypeScript 编写，支持 OpenAI 和 Anthropic Claude 两种 LLM 提供者。框架采用管理器模式（Manager Pattern）将复杂的任务执行逻辑拆分为多个独立的职责单元，实现了高内聚、低耦合的架构设计。
 
-- **包名**: `glint-ai-agent`
+- **包名**: `schoober-ai-sdk`
 - **版本**: `0.0.1`
 - **模块格式**: ESM + CJS 双输出
 - **构建工具**: Rslib（基于 Rspack）
@@ -104,10 +104,10 @@ SDK 提供 4 个入口点，通过 `package.json` 的 `exports` 字段暴露：
 
 | 入口路径 | 说明 |
 |---------|------|
-| `glint-ai-agent` | 主入口，导出所有公开 API |
-| `glint-ai-agent/core` | 核心模块（Agent、Task、Tools、所有 Manager） |
-| `glint-ai-agent/providers` | LLM 提供者（OpenAI、Anthropic） |
-| `glint-ai-agent/prompts` | 提示词构建工具 |
+| `schoober-ai-sdk` | 主入口，导出所有公开 API |
+| `schoober-ai-sdk/core` | 核心模块（Agent、Task、Tools、所有 Manager） |
+| `schoober-ai-sdk/providers` | LLM 提供者（OpenAI、Anthropic） |
+| `schoober-ai-sdk/prompts` | 提示词构建工具 |
 
 ---
 
