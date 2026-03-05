@@ -2,7 +2,7 @@
   "name": "schoober-ai-sdk",
   "version": "0.0.1",
   "type": "module",
-  "description": "Glint AI Agent - 一个基于 ReAct 模式的 AI Agent 框架",
+  "description": "schoober-ai-sdk - 一个基于 ReAct 模式的 AI Agent 框架",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

@@ -1,5 +1,5 @@
 /**
- * Glint AI Agent
+ * schoober-ai-sdk
  * 一个基于 ReAct 模式的 AI Agent 框架
  */
 
