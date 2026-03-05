@@ -400,6 +400,16 @@ export class MessageManager implements IMessageManager {
             });
             throw error;
         });
+        return this.saveApiQueue;
+    }
+
+    /**
+     * 从持久化存储加载 API 消息
+     */
+    async loadApiMessages(): Promise<void> {
+        if (!this.persistenceManager) {
+            return;
+        }
         try {
             const loadedMessages = await this.persistenceManager.loadApiMessages(this.taskId);
             this.apiMessages = loadedMessages;
