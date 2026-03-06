@@ -1,6 +1,6 @@
 {
   "name": "schoober-ai-sdk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "description": "schoober-ai-sdk - 一个基于 ReAct 模式的 AI Agent 框架",
   "main": "./dist/index.js",
