@@ -59,6 +59,7 @@ export class OpenAIProvider extends BaseLLMProvider {
                 temperature,
                 max_tokens: maxTokens,
                 stream: true,
+                stream_options: { include_usage: true }, // 启用 usage 统计
                 ...(this.getConfig().extraBody || {})
             });
 
@@ -66,8 +67,11 @@ export class OpenAIProvider extends BaseLLMProvider {
                 config.logger.debug("OpenAIProvider_createStream_streamCreated", {});
             }
 
-            // 迭代流式响应，提取文本内容
+            // 迭代流式响应，提取文本内容和 usage 统计
             let chunkCount = 0;
+            let totalInputTokens = 0;
+            let totalOutputTokens = 0;
+
             for await (const chunk of stream) {
                 chunkCount++;
 
@@ -79,6 +83,7 @@ export class OpenAIProvider extends BaseLLMProvider {
                     });
                 }
 
+                // 处理文本内容
                 const content = chunk.choices[0]?.delta?.content;
                 if (content) {
                     yield {
@@ -86,11 +91,36 @@ export class OpenAIProvider extends BaseLLMProvider {
                         text: content,
                     };
                 }
+
+                // 处理 usage 统计 (OpenAI 在流式响应的最后一个 chunk 中返回 usage)
+                if (chunk.usage) {
+                    totalInputTokens = chunk.usage.prompt_tokens || 0;
+                    totalOutputTokens = chunk.usage.completion_tokens || 0;
+
+                    if (config.logger) {
+                        config.logger.debug("OpenAIProvider_createStream_usageReceived", {
+                            inputTokens: totalInputTokens,
+                            outputTokens: totalOutputTokens,
+                            totalTokens: chunk.usage.total_tokens,
+                        });
+                    }
+
+                    yield {
+                        type: 'usage',
+                        usage: {
+                            inputTokens: totalInputTokens,
+                            outputTokens: totalOutputTokens,
+                            totalTokens: totalInputTokens + totalOutputTokens,
+                        },
+                    };
+                }
             }
 
             if (config.logger) {
                 config.logger.info("OpenAIProvider_createStream_totalChunks", {
                     totalChunks: chunkCount,
+                    inputTokens: totalInputTokens,
+                    outputTokens: totalOutputTokens,
                 });
             }
 
